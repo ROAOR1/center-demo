@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/study?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      max-active: 17
+      initial-size: 8
+      min-idle: 8
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      validationQuery: SELECT'x'
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,config
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+mybatis-plus:
+  #如果是放在java下 classpath:/yourpackage/mapper/*Mapper.xml  如果是resource classpath:/mapper/*Mapper.xml
+  mapper-locations: classpath:/com/example/core/dao/*Mapper.xml
+  #多个package用逗号或者分号分隔
+  typeAliasesPackage: com.example.core.common.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    cache-enabled: false
+  global-config:
+    enable-sql-runner: true
+    banner: false
+    db-config:
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      update-strategy: not_empty
+
+logging:
+  config: classpath:logback-spring-local.xml
